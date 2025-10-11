@@ -3,6 +3,7 @@ import type { University } from "../api/universityApi";
 import { useFavorites } from "../context/FavoritesContext";
 import { Button } from "./Button";
 import { RemarkModal } from "./RemarkModal";
+import styles from "./UniversityItem.module.css";
 
 interface UniversityItemProps {
   university: University;
@@ -38,31 +39,27 @@ export function UniversityItem({ university }: UniversityItemProps) {
   };
 
   return (
-    <li
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        padding: "12px",
-        marginBottom: "10px",
-        listStyle: "none",
-      }}
-    >
-      <div>
-        <p>
-          <strong>{university.name}</strong>
-        </p>
-        <p>{university.country}</p>
+    <li className={styles.card}>
+      <div className={styles.header}>
+        <h3 className={styles.name}>{university.name}</h3>
+        <span className={styles.country}>{university.country}</span>
+      </div>
 
+      <div className={styles.body}>
         {university.web_pages.map((web) => (
-          <p key={web}>
-            <a href={web} target="_blank" rel="noopener noreferrer">
-              Visit Website
-            </a>
-          </p>
+          <a
+            key={web}
+            href={web}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}
+          >
+            Visit Website
+          </a>
         ))}
       </div>
 
-      <div style={{ display: "flex", gap: "8px", marginTop: "8px" }}>
+      <div className={styles.actions}>
         <Button
           disabled={false}
           title={isFavorite ? "⭐ Remove Favorite" : "☆ Add Favorite"}

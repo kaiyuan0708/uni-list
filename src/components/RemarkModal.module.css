@@ -1,0 +1,72 @@
+/* Dark transparent backdrop */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+  }
+  
+  /* Modal box */
+  .modal {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  
+  /* Title */
+  .title {
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  
+  /* Buttons layout */
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  
+  /* 🧱 Responsive */
+  @media (max-width: 480px) {
+    .modal {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      padding: 16px;
+    }
+  
+    .title {
+      font-size: 1rem;
+    }
+  
+    .actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+  
+  /* Small fade animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
