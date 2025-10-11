@@ -30,7 +30,7 @@ export function UniversityItem({ university }: UniversityItemProps) {
       <p>name: {university.name}</p>
       <p>country: {university.country}</p>
       {university.web_pages.map((web) => (
-        <p>
+        <p key={web}>
           <a href={web} target="_blank" rel="noopener noreferrer">
             Website
           </a>

@@ -17,7 +17,6 @@ export function FavoritesPage() {
               <p>
                 <em>Remark:</em> {fav.remark || "(none)"}
               </p>
-              <p>Added on {new Date(fav.added_time).toLocaleString()}</p>
               <p>
                 Added on{" "}
                 {new Date(fav.added_time).toLocaleString("en-US", {
