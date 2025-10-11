@@ -14,36 +14,39 @@ export function UniversityListPage() {
   const [page, setPage] = useState(0);
   const [limit] = useState(10);
 
-  useEffect(() => {
-    setPage(0);
-  }, [name, country]);
+  const [searchParams, setSearchParams] = useState<{
+    name?: string;
+    country?: string;
+  }>({});
 
   useEffect(() => {
-    if (!name && !country) {
-      setUniversities([]);
-      return;
-    }
+    setPage(0);
+  }, [searchParams]);
+
+  useEffect(() => {
+    // Only fetch when we have searchParams (after user clicks Search)
+    if (!searchParams.name && !searchParams.country) return;
 
     async function loadData() {
       setLoading(true);
       setError(null);
       try {
         const data = await fetchUniversities({
-          name: name || undefined,
-          country: country || undefined,
+          name: searchParams.name,
+          country: searchParams.country,
           limit,
           offset: page * limit,
         });
         setUniversities(data);
       } catch (err: any) {
-        setError(err.message);
+        setError(err.message || "Failed to fetch universities");
       } finally {
         setLoading(false);
       }
     }
 
     loadData();
-  }, [name, country, page]); // re-fetch when search changes
+  }, [searchParams, page]);
 
   return (
     <div>
@@ -53,6 +56,27 @@ export function UniversityListPage() {
         value={country}
         placeholder="Country"
         onChange={setCountry}
+      />
+      <Button
+        title="Search"
+        disabled={loading || (!name && !country)}
+        onClick={() => {
+          setSearchParams({
+            name: name || undefined,
+            country: country || undefined,
+          });
+        }}
+      />
+      <Button
+        title="Reset"
+        disabled={!universities.length && !name && !country}
+        onClick={() => {
+          setName("");
+          setCountry("");
+          setUniversities([]);
+          setSearchParams({});
+          setPage(0);
+        }}
       />
       {loading && <p>Loading universities...</p>}
       {error && <p>Error: {error}</p>}
