@@ -42,6 +42,7 @@ export function RemarkModal({
           onChange={(e) => setRemark(e.target.value)}
           rows={4}
           style={{ width: "100%", marginBottom: "8px" }}
+          placeholder="Enter your remark..."
         />
         <div style={{ textAlign: "right" }}>
           <Button disabled={false} title="Cancel" onClick={onCancel} />

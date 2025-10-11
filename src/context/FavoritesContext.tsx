@@ -26,12 +26,13 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     const stored = localStorage.getItem("favorites");
     if (stored) {
       try {
-        return JSON.parse(stored);
+        const stored = localStorage.getItem("favorites");
+        return stored ? JSON.parse(stored) : [];
       } catch {
+        console.warn("Failed to parse favorites from localStorage.");
         return [];
       }
     }
-    return [];
   });
 
   // Persist to localStorage whenever favorites change
@@ -41,12 +42,10 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
 
   const addFavorite = (fav: Omit<Favorite, "added_time">) => {
     setFavorites((prev) => {
-      const exists = prev.find((f) => f.name === fav.name);
-      if (exists) return prev;
+      if (prev.some((f) => f.name === fav.name)) return prev;
       return [...prev, { ...fav, added_time: Date.now() }];
     });
   };
-  
 
   const removeFavorite = (name: string) => {
     setFavorites((prev) => prev.filter((f) => f.name !== name));

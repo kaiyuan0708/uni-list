@@ -12,7 +12,7 @@ export function SearchInput({
   return (
     <input
       type="text"
-      placeholder={placeholder || ""}
+      placeholder={placeholder}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />

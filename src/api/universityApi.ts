@@ -7,30 +7,44 @@ export interface University {
   domains: string[];
 }
 
-/**
- * Fetch universities from API
- * @param params Optional search parameters: { name?, country?, limit?, offset? }
- */
-export async function fetchUniversities(params?: {
+export interface UniversityQueryParams {
   name?: string;
   country?: string;
   limit?: number;
   offset?: number;
-}): Promise<University[]> {
-  const query = new URLSearchParams();
+}
 
-  if (params?.name) query.append("name", params.name);
-  if (params?.country) query.append("country", params.country);
-  if (params?.limit) query.append("limit", params.limit.toString());
-  if (params?.offset) query.append("offset", params.offset.toString());
+const BASE_URL = "http://universities.hipolabs.com/search";
 
-  const url = query.toString()
-    ? `http://universities.hipolabs.com/search?${query.toString()}`
-    : "http://universities.hipolabs.com/search";
+/**
+ * Fetch a list of universities with optional search filters
+ * @param params Query parameters for name, country, limit, offset
+ * @returns A promise resolving to an array of universities
+ */
+export async function fetchUniversities(
+  params?: UniversityQueryParams
+): Promise<University[]> {
+  try {
+    const query = new URLSearchParams();
 
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("Failed to fetch universities");
+    if (params) {
+      const { name, country, limit, offset } = params;
+
+      if (name) query.append("name", name);
+      if (country) query.append("country", country);
+      if (limit) query.append("limit", limit.toString());
+      if (offset) query.append("offset", offset.toString());
+    }
+
+    const url = query.size > 0 ? `${BASE_URL}?${query}` : BASE_URL;
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Failed to fetch universities");
+    }
+    const data = (await response.json()) as University[];
+    return data;
+  } catch (error) {
+    throw new Error("Unexpected error fetching universities");
   }
-  return response.json();
 }

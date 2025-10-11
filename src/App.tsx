@@ -1,20 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router"
-import { Header } from "./components/Header"
-import { UniversityListPage } from "./pages/UniversityListPage"
-import { FavoritesPage } from "./pages/FavoritesPage"
+import { BrowserRouter as Router } from "react-router";
+import { Header } from "./components/Header";
+import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
   return (
     <Router>
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" element={<UniversityListPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-        </Routes>
-      </div>
+      <Header />
+      <AppRoutes />
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

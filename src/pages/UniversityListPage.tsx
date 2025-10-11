@@ -4,11 +4,13 @@ import { fetchUniversities } from "../api/universityApi";
 import { UniversityItem } from "../components/UniversityItem";
 import { SearchInput } from "../components/SearchInput";
 import { Button } from "../components/Button";
+import { Pagination } from "../components/Pagination";
 
 export function UniversityListPage() {
   const [universities, setUniversities] = useState<University[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [page, setPage] = useState(0);
@@ -24,9 +26,6 @@ export function UniversityListPage() {
   }, [searchParams]);
 
   useEffect(() => {
-    // Only fetch when we have searchParams (after user clicks Search)
-    if (!searchParams.name && !searchParams.country) return;
-
     async function loadData() {
       setLoading(true);
       setError(null);
@@ -48,63 +47,68 @@ export function UniversityListPage() {
     loadData();
   }, [searchParams, page]);
 
+  const handleSearch = () => {
+    setSearchParams({
+      name: name || undefined,
+      country: country || undefined,
+    });
+  };
+
+  const handleReset = () => {
+    setName("");
+    setCountry("");
+    setUniversities([]);
+    setSearchParams({});
+    setPage(0);
+  };
+
   return (
-    <div>
-      <p>University List Page</p>
-      <SearchInput value={name} placeholder="Uni name" onChange={setName} />
-      <SearchInput
-        value={country}
-        placeholder="Country"
-        onChange={setCountry}
-      />
-      <Button
-        title="Search"
-        disabled={loading || (!name && !country)}
-        onClick={() => {
-          setSearchParams({
-            name: name || undefined,
-            country: country || undefined,
-          });
-        }}
-      />
-      <Button
-        title="Reset"
-        disabled={!universities.length && !name && !country}
-        onClick={() => {
-          setName("");
-          setCountry("");
-          setUniversities([]);
-          setSearchParams({});
-          setPage(0);
-        }}
-      />
+    <section style={{ padding: "16px" }}>
+      <h2>University Search</h2>
+
+      <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
+        <SearchInput
+          value={name}
+          placeholder="University name"
+          onChange={setName}
+        />
+        <SearchInput
+          value={country}
+          placeholder="Country"
+          onChange={setCountry}
+        />
+        <Button title="Search" disabled={loading} onClick={handleSearch} />
+        <Button
+          title="Reset"
+          disabled={!universities.length && !name && !country}
+          onClick={handleReset}
+        />
+      </div>
+
+      {/* 🔹 Loading / Error / Empty States */}
       {loading && <p>Loading universities...</p>}
-      {error && <p>Error: {error}</p>}
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
       {!loading && !error && universities.length === 0 && (
         <p>No universities found</p>
       )}
+
+      {/* 🔹 Results List */}
       {!loading && !error && universities.length > 0 && (
         <div>
-          <ul>
+          <ul style={{ padding: 0 }}>
             {universities.map((uni) => (
               <UniversityItem key={uni.name} university={uni} />
             ))}
-
-            <div>
-              <Button
-                title="Previous"
-                disabled={page === 0}
-                onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
-              />
-              <Button
-                title="Next"
-                disabled={universities.length < limit} // disable next if less than limit
-                onClick={() => setPage((prev) => prev + 1)}
-              />
-            </div>
           </ul>
+
+          <Pagination
+            page={page}
+            hasNext={universities.length === limit}
+            onPrev={() => setPage((prev) => Math.max(prev - 1, 0))}
+            onNext={() => setPage((prev) => prev + 1)}
+          />
         </div>
       )}
-    </div>
+    </section>
   );
 }
