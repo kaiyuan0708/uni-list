@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import styles from "./Pagination.module.css";
 
 interface PaginationProps {
@@ -6,28 +7,40 @@ interface PaginationProps {
   hasNext: boolean;
   onPrev: () => void;
   onNext: () => void;
+  className?: string;
 }
 
-export function Pagination({ page, hasPrev = page > 0, hasNext, onPrev, onNext }: PaginationProps) {
+export function Pagination({
+  page,
+  hasPrev = page > 0,
+  hasNext,
+  onPrev,
+  onNext,
+  className,
+}: PaginationProps) {
   return (
-    <div className={styles.container}>
+    <nav className={clsx(styles.container, className)} aria-label="Pagination">
       <button
-        className={styles.button}
+        type="button"
+        className={clsx(styles.button, !hasPrev && styles.disabled)}
         disabled={!hasPrev}
         onClick={onPrev}
       >
         ← Previous
       </button>
 
-      <span className={styles.pageInfo}>Page {page + 1}</span>
+      <span className={styles.pageInfo} aria-live="polite">
+        Page {page + 1}
+      </span>
 
       <button
-        className={styles.button}
+        type="button"
+        className={clsx(styles.button, !hasNext && styles.disabled)}
         disabled={!hasNext}
         onClick={onNext}
       >
         Next →
       </button>
-    </div>
+    </nav>
   );
 }

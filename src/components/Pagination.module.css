@@ -10,24 +10,23 @@
   
   .pageInfo {
     font-size: 0.95rem;
-    font-weight: 500;
-    color: #FF8C00;
+    font-weight: 600;
+    color: #2563eb
   }
   
-  .button {
+  button {
     padding: 8px 16px;
-    border: 1px solid #ddd;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
-    background-color: #fff;
-    color: #333;
+    background-color: #ffffff;
+    color: #1f2937;
     font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    min-width: 100px;
   }
   
   .button:hover:not(:disabled) {
-    background-color: #f3f3f3;
-    border-color: #bbb;
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
   }
   
   .button:disabled {
@@ -35,20 +34,23 @@
     cursor: not-allowed;
   }
   
-  /* Responsive behavior */
-  @media (max-width: 600px) {
-    .container {
-      flex-direction: column;
-      gap: 8px;
-    }
-  
-    .button {
-      width: 100%;
-      font-size: 0.9rem;
-    }
-  
-    .pageInfo {
-      font-size: 0.9rem;
-    }
+@media (max-width: 600px) {
+  .container {
+    flex-direction: row; /* keep same row even on mobile */
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
   }
-  
+
+  .button {
+    flex: 1;
+    font-size: 0.9rem;
+    padding: 10px 0;
+    min-width: unset;
+  }
+
+  .pageInfo {
+    font-size: 0.9rem;
+  }
+}
