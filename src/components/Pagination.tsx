@@ -2,7 +2,7 @@ import styles from "./Pagination.module.css";
 
 interface PaginationProps {
   page: number;
-  hasPrev: boolean;
+  hasPrev?: boolean;
   hasNext: boolean;
   onPrev: () => void;
   onNext: () => void;
