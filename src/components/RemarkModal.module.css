@@ -1,72 +1,88 @@
-/* Dark transparent backdrop */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 16px;
-  }
-  
-  /* Modal box */
-  .modal {
-    background: #ffffff;
+.remarkModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+  animation: fadeInBackdrop 0.25s ease-out;
+}
+
+.remarkModalBox {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeInModal 0.25s ease-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.remarkModalTitle {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  text-align: left;
+}
+
+.remarkModalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.remarkModalActions button {
+  min-width: 90px;
+  transition: background-color 0.15s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.remarkModalActions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .remarkModalBox {
+    max-width: 100%;
     border-radius: 10px;
-    padding: 20px;
+    padding: 18px;
+  }
+
+  .remarkModalTitle {
+    font-size: 1.1rem;
+  }
+
+  .remarkModalActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .remarkModalActions button {
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    animation: fadeIn 0.2s ease-in-out;
   }
-  
-  /* Title */
-  .title {
-    margin: 0 0 12px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #1e293b;
+}
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  /* Buttons layout */
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 12px;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  /* 🧱 Responsive */
-  @media (max-width: 480px) {
-    .modal {
-      max-width: 100%;
-      border-radius: 0.5rem;
-      padding: 16px;
-    }
-  
-    .title {
-      font-size: 1rem;
-    }
-  
-    .actions {
-      flex-direction: column;
-      align-items: stretch;
-    }
+}
+
+@keyframes fadeInBackdrop {
+  from {
+    opacity: 0;
   }
-  
-  /* Small fade animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+  to {
+    opacity: 1;
   }
-  
+}
