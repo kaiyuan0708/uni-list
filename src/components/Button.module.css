@@ -1,70 +1,38 @@
 .button {
-    font-size: 0.95rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 100px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+}
+
+/* 🎨 Primary */
+.primary {
+  background-color: #cdadf0;
+  color: #ffffff;
+}
+
+.primary:hover:not(.disabled) {
+  background-color: #c28cff;
+}
+
+.disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .button {
+    width: 100%;
+    min-width: unset;
   }
-  
-  /* 🎨 Primary Button */
-  .primary {
-    background-color: #0077ff;
-    color: white;
-  }
-  
-  .primary:hover:not(.disabled) {
-    background-color: #005fd1;
-  }
-  
-  .primary:active:not(.disabled) {
-    background-color: #0046a3;
-  }
-  
-  /* ⚪ Secondary Button */
-  .secondary {
-    background-color: #f2f2f2;
-    color: #333;
-  }
-  
-  .secondary:hover:not(.disabled) {
-    background-color: #e0e0e0;
-  }
-  
-  .secondary:active:not(.disabled) {
-    background-color: #cfcfcf;
-  }
-  
-  /* 🔴 Danger Button */
-  .danger {
-    background-color: #ff4d4f;
-    color: white;
-  }
-  
-  .danger:hover:not(.disabled) {
-    background-color: #e04445;
-  }
-  
-  .danger:active:not(.disabled) {
-    background-color: #c93b3d;
-  }
-  
-  /* 🚫 Disabled state */
-  .disabled,
-  button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  
-  /* ✅ Responsive */
-  @media (max-width: 600px) {
-    .button {
-      min-width: auto;
-      width: 100%;
-    }
-  }
+}
