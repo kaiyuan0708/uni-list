@@ -54,15 +54,7 @@ export function UniversityListPage() {
       country: country || undefined,
     });
   };
-
-  const handleReset = () => {
-    setName("");
-    setCountry("");
-    setUniversities([]);
-    setSearchParams({});
-    setPage(0);
-  };
-
+  
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>University Search</h2>
@@ -79,11 +71,6 @@ export function UniversityListPage() {
           onChange={setCountry}
         />
         <Button title="Search" disabled={loading} onClick={handleSearch} />
-        <Button
-          title="Reset"
-          disabled={!universities.length && !name && !country}
-          onClick={handleReset}
-        />
       </div>
 
       {/* 🔹 Loading / Error / Empty States */}
