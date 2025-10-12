@@ -17,7 +17,6 @@ export function FavoritesPage() {
 
   const hasNext = (page + 1) * ITEMS_PER_PAGE < favorites.length;
 
-  // Reset page when favorites list changes (avoid empty last page)
   if (page > 0 && paginated.length === 0) {
     setPage(0);
   }
@@ -27,7 +26,9 @@ export function FavoritesPage() {
       <h2 className={styles.title}>My Favorite Universities</h2>
 
       {favorites.length === 0 ? (
-        <p className={styles.empty}>No favorites yet. Add some from the list!</p>
+        <p className={styles.empty}>
+          No favorites yet. Add some from the list!
+        </p>
       ) : (
         <>
           <ul className={styles.list}>

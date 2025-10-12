@@ -35,8 +35,7 @@ export function FavoritesItem({
       </header>
 
       <p className={styles.favItemRemark}>
-        <strong>Remark:</strong>{" "}
-        <span>{remark?.trim() || "(none)"}</span>
+        <strong>Remark:</strong> <span>{remark?.trim() || "(none)"}</span>
       </p>
 
       <p className={styles.favItemDate}>

@@ -37,7 +37,6 @@
   color: #ff8c00;
 }
 
-/* ✅ Responsive for small screens */
 @media (max-width: 600px) {
   .nav {
     padding: 10px 16px;

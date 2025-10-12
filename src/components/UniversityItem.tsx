@@ -40,12 +40,12 @@ export function UniversityItem({ university }: UniversityItemProps) {
 
   return (
     <li className={styles.uniItemCard}>
-    <div className={styles.uniItemHeader}>
-      <h3 className={styles.uniItemName}>{university.name}</h3>
-      <span className={styles.uniItemCountry}>{university.country}</span>
-    </div>
+      <div className={styles.uniItemHeader}>
+        <h3 className={styles.uniItemName}>{university.name}</h3>
+        <span className={styles.uniItemCountry}>{university.country}</span>
+      </div>
 
-    <div className={styles.uniItemLinks}>
+      <div className={styles.uniItemLinks}>
         {university.web_pages.map((web) => (
           <a
             key={web}

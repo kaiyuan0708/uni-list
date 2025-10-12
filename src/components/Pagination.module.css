@@ -1,42 +1,42 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    padding: 8px 0;
-  }
-  
-  .pageInfo {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #2563eb
-  }
-  
-  button {
-    padding: 8px 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background-color: #ffffff;
-    color: #1f2937;
-    font-size: 0.95rem;
-    min-width: 100px;
-  }
-  
-  .button:hover:not(:disabled) {
-    background-color: #f3f4f6;
-    border-color: #9ca3af;
-  }
-  
-  .button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.pageInfo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+button {
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #1f2937;
+  font-size: 0.95rem;
+  min-width: 100px;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @media (max-width: 600px) {
   .container {
-    flex-direction: row; /* keep same row even on mobile */
+    flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     width: 100%;
