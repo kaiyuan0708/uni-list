@@ -1,7 +1,7 @@
 .app-container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 80px 1rem 2rem; /* top padding leaves space for fixed header */
+  padding: 80px 1rem 2rem;
 }
 
 /* Basic responsive layout */
