@@ -5,6 +5,7 @@ import { UniversityItem } from "../components/UniversityItem";
 import { SearchInput } from "../components/SearchInput";
 import { Button } from "../components/Button";
 import { Pagination } from "../components/Pagination";
+import styles from "./UniversityListPage.module.css";
 
 export function UniversityListPage() {
   const [universities, setUniversities] = useState<University[]>([]);
@@ -63,10 +64,10 @@ export function UniversityListPage() {
   };
 
   return (
-    <section style={{ padding: "16px" }}>
-      <h2>University Search</h2>
+    <section className={styles.container}>
+      <h2 className={styles.title}>University Search</h2>
 
-      <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
+      <div className={styles.searchBar}>
         <SearchInput
           value={name}
           placeholder="University name"
@@ -86,27 +87,29 @@ export function UniversityListPage() {
       </div>
 
       {/* 🔹 Loading / Error / Empty States */}
-      {loading && <p>Loading universities...</p>}
-      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+      {loading && <p className={styles.loading}>Loading universities...</p>}
+      {error && <p className={styles.error}>Error: {error}</p>}
       {!loading && !error && universities.length === 0 && (
-        <p>No universities found</p>
+        <p className={styles.empty}>No universities found</p>
       )}
 
       {/* 🔹 Results List */}
       {!loading && !error && universities.length > 0 && (
-        <div>
-          <ul style={{ padding: 0 }}>
+        <div className={styles.results}>
+          <ul className={styles.list}>
             {universities.map((uni) => (
               <UniversityItem key={uni.name} university={uni} />
             ))}
           </ul>
 
-          <Pagination
-            page={page}
-            hasNext={universities.length === limit}
-            onPrev={() => setPage((prev) => Math.max(prev - 1, 0))}
-            onNext={() => setPage((prev) => prev + 1)}
-          />
+          <div className={styles.paginationWrapper}>
+            <Pagination
+              page={page}
+              hasNext={universities.length === limit}
+              onPrev={() => setPage((prev) => Math.max(prev - 1, 0))}
+              onNext={() => setPage((prev) => prev + 1)}
+            />
+          </div>
         </div>
       )}
     </section>
