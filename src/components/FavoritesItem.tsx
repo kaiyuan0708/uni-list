@@ -28,16 +28,18 @@ export function FavoritesItem({
   };
 
   return (
-    <li className={styles.item}>
-      <div className={styles.info}>
-        <strong>{name}</strong> — {country}
-      </div>
+    <article className={styles.favItemCard}>
+      <header className={styles.favItemHeader}>
+        <h3 className={styles.favItemName}>{name}</h3>
+        <span className={styles.favItemCountry}>{country}</span>
+      </header>
 
-      <div className={styles.remark}>
-        <em>Remark:</em> {remark || "(none)"}
-      </div>
+      <p className={styles.favItemRemark}>
+        <strong>Remark:</strong>{" "}
+        <span>{remark?.trim() || "(none)"}</span>
+      </p>
 
-      <div className={styles.date}>
+      <p className={styles.favItemDate}>
         Added on{" "}
         {new Date(added_time).toLocaleString("en-US", {
           year: "numeric",
@@ -46,17 +48,18 @@ export function FavoritesItem({
           hour: "2-digit",
           minute: "2-digit",
         })}
-      </div>
+      </p>
 
-      <div className={styles.actions}>
+      <div className={styles.favItemActions}>
         <Button
-          disabled={false}
           title="Edit Remark"
+          disabled={false}
           onClick={() => setIsEditing(true)}
         />
         <Button
-          disabled={false}
           title="Remove"
+          variant="danger"
+          disabled={false}
           onClick={() => onRemove(name)}
         />
       </div>
@@ -68,6 +71,6 @@ export function FavoritesItem({
           onCancel={() => setIsEditing(false)}
         />
       )}
-    </li>
+    </article>
   );
 }

@@ -11,7 +11,6 @@ export function UniversityListPage() {
   const [universities, setUniversities] = useState<University[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [page, setPage] = useState(0);
@@ -44,7 +43,6 @@ export function UniversityListPage() {
         setLoading(false);
       }
     }
-
     loadData();
   }, [searchParams, page]);
 
@@ -54,12 +52,12 @@ export function UniversityListPage() {
       country: country || undefined,
     });
   };
-  
-  return (
-    <section className={styles.container}>
-      <h2 className={styles.title}>University Search</h2>
 
-      <div className={styles.searchBar}>
+  return (
+    <section className={styles.uniListContainer}>
+      <h2 className={styles.uniListTitle}>University List</h2>
+
+      <div className={styles.uniListSearchBar}>
         <SearchInput
           value={name}
           placeholder="University name"
@@ -73,23 +71,23 @@ export function UniversityListPage() {
         <Button title="Search" disabled={loading} onClick={handleSearch} />
       </div>
 
-      {/* 🔹 Loading / Error / Empty States */}
-      {loading && <p className={styles.loading}>Loading universities...</p>}
-      {error && <p className={styles.error}>Error: {error}</p>}
+      {loading && (
+        <p className={styles.uniListLoading}>Loading universities...</p>
+      )}
+      {error && <p className={styles.uniListError}>Error: {error}</p>}
       {!loading && !error && universities.length === 0 && (
-        <p className={styles.empty}>No universities found</p>
+        <p className={styles.uniListEmpty}>No universities found</p>
       )}
 
-      {/* 🔹 Results List */}
       {!loading && !error && universities.length > 0 && (
-        <div className={styles.results}>
-          <ul className={styles.list}>
+        <div className={styles.uniListResults}>
+          <ul className={styles.uniListList}>
             {universities.map((uni) => (
               <UniversityItem key={uni.name} university={uni} />
             ))}
           </ul>
 
-          <div className={styles.paginationWrapper}>
+          <div className={styles.uniListPaginationWrapper}>
             <Pagination
               page={page}
               hasNext={universities.length === limit}
