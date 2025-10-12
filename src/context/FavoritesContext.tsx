@@ -66,7 +66,6 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// 🔹 Hook to consume context
 export const useFavorites = (): FavoritesContextType => {
   const context = useContext(FavoritesContext);
   if (!context)
@@ -74,5 +73,4 @@ export const useFavorites = (): FavoritesContextType => {
   return context;
 };
 
-// 🔹 Optional default export to help HMR
 export default FavoritesProvider;

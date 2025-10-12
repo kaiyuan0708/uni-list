@@ -39,27 +39,27 @@ export function UniversityItem({ university }: UniversityItemProps) {
   };
 
   return (
-    <li className={styles.card}>
-      <div className={styles.header}>
-        <h3 className={styles.name}>{university.name}</h3>
-        <span className={styles.country}>{university.country}</span>
-      </div>
+    <li className={styles.uniItemCard}>
+    <div className={styles.uniItemHeader}>
+      <h3 className={styles.uniItemName}>{university.name}</h3>
+      <span className={styles.uniItemCountry}>{university.country}</span>
+    </div>
 
-      <div className={styles.body}>
+    <div className={styles.uniItemLinks}>
         {university.web_pages.map((web) => (
           <a
             key={web}
             href={web}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.link}
+            className={styles.uniItemLink}
           >
-            Visit Website
+            {web}
           </a>
         ))}
       </div>
 
-      <div className={styles.actions}>
+      <div className={styles.uniItemActions}>
         <Button
           disabled={false}
           title={isFavorite ? "⭐ Remove Favorite" : "☆ Add Favorite"}
