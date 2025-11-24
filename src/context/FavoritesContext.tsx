@@ -23,15 +23,12 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(
 // 🔹 Provider component
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<Favorite[]>(() => {
-    const stored = localStorage.getItem("favorites");
-    if (stored) {
-      try {
-        const stored = localStorage.getItem("favorites");
-        return stored ? JSON.parse(stored) : [];
-      } catch {
-        console.warn("Failed to parse favorites from localStorage.");
-        return [];
-      }
+    try {
+      const stored = localStorage.getItem("favorites");
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      console.warn("Failed to parse favorites from localStorage.");
+      return [];
     }
   });
 
