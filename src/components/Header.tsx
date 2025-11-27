@@ -5,7 +5,7 @@ export function Header() {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-        <Link to="/" className={styles.logo}>
+        <Link to="/" className={styles.link}>
           🎓 UniFinder
         </Link>
         <Link to="/favorites" className={styles.link}>
