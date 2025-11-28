@@ -1,12 +1,11 @@
 .app-container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 80px 1rem 2rem;
+  padding: 60px 1rem 2rem;
 }
 
-/* Basic responsive layout */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .app-container {
-    padding: 70px 1rem 1rem;
+    padding: 60px 0.5rem 0.5rem;
   }
 }
